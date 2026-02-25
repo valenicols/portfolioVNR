@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const glow = document.querySelector(".cursor-glow");
   const card = document.querySelector(".image-card");
 
+  // Menú hamburguesa
+  const hamburger = document.querySelector(".hamburger");
+  const menu = document.querySelector(".menu-wrapper");
+
+  hamburger.addEventListener("click", () => {
+    menu.classList.toggle("active");
+  });
+
   // Cursor glow
   document.addEventListener("mousemove", (e) => {
     if (glow) {
@@ -42,3 +50,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+

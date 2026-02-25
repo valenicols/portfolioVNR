@@ -40,7 +40,7 @@ body {
 }
 
 /* ===============================
-   HEADER SUPERIOR CENTRADO
+   HEADER
 ================================= */
 
 .side-header {
@@ -48,7 +48,7 @@ body {
   top: 30px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 100;
+  z-index: 1000;
 }
 
 .menu-wrapper {
@@ -58,21 +58,23 @@ body {
   gap: 20px;
 }
 
-/* Logo arriba */
+/* Logo */
 .logo {
   font-size: 20px;
   font-weight: 600;
   letter-spacing: 2px;
 }
 
-/* Menú ahora horizontal */
+/* ===============================
+   MENÚ DESKTOP
+================================= */
+
 .side-menu {
   display: flex;
   flex-direction: row;
   gap: 25px;
 }
 
-/* Botones */
 .side-menu a {
   width: 90px;
   height: 90px;
@@ -87,7 +89,6 @@ body {
   gap: 8px;
 
   background: var(--glass-bg);
-  border: 0px solid var(--glass-border);
   border-radius: 20px;
 
   backdrop-filter: blur(20px);
@@ -101,18 +102,59 @@ body {
 }
 
 /* ===============================
-   HERO SECTION
+   HAMBURGER
+================================= */
+
+.hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  position: fixed;
+  top: 25px;
+  left: 20px;
+  z-index: 2000;
+}
+
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background: var(--text-main);
+  border-radius: 3px;
+  transition: all 0.4s ease;
+}
+
+/* Animación X */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+  background: var(--accent-pink);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+  background: var(--accent-pink);
+}
+
+/* ===============================
+   HERO
 ================================= */
 
 .hero {
   display: flex;
-  justify-content: center;   /* centramos las cards */
+  justify-content: center;
   align-items: center;
 
   min-height: 100vh;
   padding: 140px 80px 80px 80px;
-
-  gap: 50px; /* 👈 separación elegante */
+  gap: 50px;
 }
 
 /* ===============================
@@ -128,8 +170,6 @@ body {
 
   background: var(--glass-bg);
   backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-
   border: 0px solid var(--glass-border);
 
   box-shadow:
@@ -147,87 +187,34 @@ body {
   flex-shrink: 0;
 
   border-radius: 24px;
-  overflow: hidden; /* 🔥 esto arregla las esquinas */
+  overflow: hidden;
 
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
 
   box-shadow:
     0 20px 60px rgba(236, 72, 153, 0.15),
     inset 0 0 40px rgba(255, 255, 255, 0.4);
 
   animation: breathe 4s ease-in-out infinite;
-
   cursor: pointer;
-  overflow: hidden;
-
   position: relative;
 }
-
-@keyframes breathe {
-  0% {
-    transform: scale(1);
-    box-shadow:
-      0 20px 60px rgba(236, 72, 153, 0.15),
-      inset 0 0 40px rgba(255, 255, 255, 0.4);
-  }
-  50% {
-    transform: scale(1.03);
-    box-shadow:
-      0 25px 70px rgba(236, 72, 153, 0.25),
-      inset 0 0 50px rgba(255, 255, 255, 0.6);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow:
-      0 20px 60px rgba(236, 72, 153, 0.15),
-      inset 0 0 40px rgba(255, 255, 255, 0.4);
-  }
-}
-
-/* ===============================
-   SPARKLES
-================================= */
-
-.falling-sparkle {
-  position: fixed;
-  border-radius: 10%;
-  pointer-events: none;
-
-  background: radial-gradient(circle, #ff8bd1 0%, #ec4899 60%, transparent 80%);
-  box-shadow: 0 0 10px rgba(236, 72, 153, 0.6);
-
-  animation: fall 4s cubic-bezier(.25,.46,.45,.94) forwards;
-}
-
-@keyframes fall {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translate(calc(var(--random-x) / 2), 50vh) scale(1.1);
-  }
-
-  100% {
-    transform: translate(var(--random-x), 100vh) scale(0.6);
-    opacity: 0;
-  }
-}
-
-
 
 .image-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+}
+
+@keyframes breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
 }
 
 /* ===============================
-   TITULOS
+   TITLES
 ================================= */
 
 h1 {
@@ -254,7 +241,7 @@ h1 span {
 }
 
 /* ===============================
-   BLOBS
+   BACKGROUND BLOBS
 ================================= */
 
 .background {
@@ -273,50 +260,64 @@ h1 span {
   height: 250px;
   border-radius: 50%;
   filter: blur(80px);
-  z-index: -1;
 }
 
 .blob1 {
   background: radial-gradient(circle, #f9a8d4, #fbcfe8);
   top: 5%;
   left: 5%;
-  animation: float1 14s infinite alternate ease-in-out;
 }
 
 .blob2 {
   background: radial-gradient(circle, #c4b5fd, #e9d5ff);
   bottom: 10%;
   right: 10%;
-  animation: float2 16s infinite alternate ease-in-out;
-}
-
-.blob3 {
-  background: radial-gradient(circle, #92b7f7, #c9d5f7);
-  top: 50%;
-  right: 20%;
-  animation: float3 12s infinite alternate ease-in-out;
-}
-
-@keyframes float1 {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(350px, 250px); }
-}
-
-@keyframes float2 {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(-300px, -280px); }
-}
-
-@keyframes float3 {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(280px, -300px); }
 }
 
 /* ===============================
    RESPONSIVE
 ================================= */
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: flex;
+  }
+
+  .menu-wrapper {
+    display: none;
+  }
+
+  .menu-wrapper.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    padding: 30px;
+    border-radius: 20px;
+  }
+
+  .side-menu {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .side-menu a {
+    width: 220px;
+    height: 60px;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 20px;
+    gap: 15px;
+  }
 
   .hero {
     flex-direction: column;
@@ -328,35 +329,8 @@ h1 span {
     max-width: 100%;
   }
 
-  .side-header {
-    display: none;
-  }
-}
-
-@media (max-width: 600px) {
-
   h1 {
     font-size: 2.2rem;
   }
 
-  .glass-card {
-    padding: 40px 25px;
-  }
-
-  .blob {
-    width: 350px;
-    height: 350px;
-  }
 }
-
-.cursor-glow {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border-radius: 60%;
-  pointer-events: none;
-  background: radial-gradient(circle, rgba(236,72,153,0.4), transparent 70%);
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
